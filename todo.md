@@ -5,7 +5,7 @@ Collaborative project (up to $15k)
 
 - [x] 2 - Summary of the project (200 words) @afourtassi `main.tex`
 
-- [ ] 3 - Project description (5 pages max) @afourtassi `main.tex`
+- [x] 3 - Project description (5 pages max) @afourtassi `main.tex`
 
 - [x] 4 - Statement explaining how the proposed collaboration meets the France-Stanford Center's criteria regarding new collaborations, interdisciplinary and participation by junior researcher"  (1 page max) @mcfrank `main.tex`
 
@@ -28,6 +28,6 @@ Visiting Scholar fellowship (up to $7k)
 
 - [ ] 12 - Recommendation letter from the applicant’s home supervisor, discussing the applicant and the merits of the proposed visit. Advisor should send letter directly by email to Isabelle Collignon, Program Coordinator, isabelle@stanford.edu. @edupoux 
 
-- [ ] 13 - Letter from the individual serving as the official sponsor, explaining the nature of the applicant’s proposed research/work activities and plans to fully incorporate him/her into the host environment. `sponsor_letter.tex` @mcfrank
+- [x] 13 - Letter from the individual serving as the official sponsor, explaining the nature of the applicant’s proposed research/work activities and plans to fully incorporate him/her into the host environment. `sponsor_letter.tex` @mcfrank
 
 - [x] 14 - Applicant's CV @afourtassi
