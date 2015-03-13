@@ -1,0 +1,111 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+
+\title{France-Stanford Collaborative Project}
+\author{Abdellah, Mike, Emmanuel}
+\date{March 2015}
+
+\begin{document}
+
+\maketitle
+
+\section*{Abstract}
+
+Language acquisition---the process by which children break into their native language---is both an exciting scientific frontier and a critical applied issue. During the course of acquisition, babies both have to learn the meanings of words and learn to recognize different ways the same word is pronounced, ignoring irrelevant variations. These two aspects of language learning are both important problems but have typically been studied independently. Exciting new findings suggest that studying these two problems together may lead to advances in understanding children's learning, however. In our proposed project, we will launch a large scale interdisciplinary investigation at the interface of phonological (sound) and semantic (meaning) learning. The objective is to inquire if such an interaction is possible, how it is predicted to develop across time and through what mechanisms. It will bring together experts in low-level speech processing at Laboratoire de Science Cognitive et Psycholinguistique (LSCP) in Paris, and experts in high-level semantic learning and pragmatic inference at the Stanford Language and Cognition Lab. This project will integrate cutting edge speech technology tools with computer vision algorithms to analyse data form recorded interactions of children with their parents in realistic learning contexts. Our goal is to develop a model of joint sound and meaning learning that we can test in a controlled setting with young children (through methods that we have available at Stanford). This intensive collaboration will help to bring new and complementary knowledge to both LSCP and Stanford.
+
+\section*{Introduction}
+
+Word learning can be characterized as  a mapping between two categories:
+
+- the \textit{form} category that defines what counts as an acoustic instance of the word (ex, [kat] and [ka?] must be interpreted as variation of the same word /kat/).
+
+- the \textit{meaning} category that sets the boundary of what counts as a valid instance of the referent (a black cat and a brown cat are both instances of the category referred to as /kat/).
+
+The development of form category has, for a long time, been considered separately from the development of conceptual and semantic knowledge, usually under the assumption that infants master the phonological properties of the form way before they start mapping it to the conceptual referent.  Consequently, while there is a wealth of studies documenting how linguistic labels help shaping conceptual categories (see Voulomanos and Waxman 2014 for a recent review), little (if any) has been done to investigate systematically the opposite effect, i.e., the extent to which semantic knowledge shapes the form of words across development. 
+
+This received wisdom is now changing in the light of recent findings in word learning literature. On the one hand, it has been shown that infants start mapping form to meaning very early in life (Mandel 1995; Tincoff and Jusczyk 1999; Bergelson \& Swingley 2012), even before the typical perceptual attunement to native sounds (Werker \& Tees 1984) has developed by one year of age.  On the other hand,  it turned out the word form cannot be characterized solely on a perceptual ground, as infants and adults alike are able to perceive semantically irrelevant phonetic details (McMurray 2002,2005).  The seminal work of Stager and Werker (1997) demonstrated that a robust phonological representation takes apparently longer than what could be deduced from pure discrimination. In fact, infants under 17 months, who can perfectly discriminate a new word form contrast, were not always able to map it to distinct objects (see part II for a detailed analysis). 
+
+It has become clear that the development of form and meaning does not follow a strict linear order, and that a synergy between these two levels is highly probable. Our project tries to fill the void in the literature on the potential role of meaning in shaping word form categories. 
+First, we will quantify the semantic information available to infants across development stages, and investigate \textbf{whether} and \textbf{when} this information is a priori useful to disambiguate the phonological boundary of lexical categories. Second, we will run an experiment with infants at a crucial age, to test \textbf{how} semantic properties of the referents influence their phonological processing of the form.
+
+\section*{Part I : Does Semantics help? and When?}
+
+In this part of the project, we perfome a computational analysis of the semantic input available to infants. Data have been collected by placing a camera on the forehead of babies at different developmental stages. This strategy will allow us to assess their learning in a realistic context.
+
+Using a similar methodology, previous research has documented significant changes in the available visual environment during the first two years, and interestingly, that these changes correlate with performance at different aspects of cognitive development such as object recognition (James et al, 2013), access to social cues in word learning (Frank et al. 2013) and causal agency (Cicchino et al. 2011).
+Here we try to investigate the extent to which semantic cues available to infants help tune the phonological boundary of automatically extracted lexical categories. 
+
+\subsection*{population and corpus preparation}
+(from Frank et al. (2013) Cog Sc but should be updated) Participants are 20 infants and children (N=4 each at 4, 8, 12, 16, and 20 months, 9 females total). The experimenter presented the child’s parent with a box containing three labeled pairs of objects, each consisting of a familiar and a novel object (e.g. a ball and a feather duster, marked as a “zem”). Parents were instructed to play with the object pairs with the child, one at a time, “as they typically would” and to use the novel labels to refer to the three toys. After giving these instructions, the experimenter left the room for a period of approximately 15 minutes. During this time, the headcam captured video from the child’s perspective.
+\subsection*{Method and procedure}
+The audio input will be analysed as follows:  starting with an acoustic template of a target word (ex: “zem”), tokens will be searched automatically based on their acoustic similarity. We will use the generic Mel-frequency cepstrum coefficients (MFCCs) as an acoustic representation and Dynamic Time Warping (DTW) as a measure of similarity, both are typically used in speech technology. 
+
+Since the acoustic similarity is continuous, the classification of a token inside or outside the target lexical category will depend on the threshold set by the experimenter: a too conservative threshold will give rise to a category with high precision but low recall. That is to say, only highly similar instances will be recognized and most instances will be missed. A too liberal threshold will give rise to a category with high recall but low precision. In other words, the category will include tokens of different -but acoustically similar- words.
+
+Can semantics  help select the optimal “phonological threshold”?  
+To test this hypothesis, semantic features will be extracted from the visual scene and paired with the acoustic representation of the corresponding word tokens. The extraction will be carried out both through hand annotation (as a baseline) and automatic means, using free online softwares. 
+For hand annotation, we will use DataVyu Coding System software (http://datavyu.org/).
+For automatic detection of high level semantic elements (objects, faces,..) we will use VATIC (Visual Annotation Tool from Irvine California, http://web.mit.edu/vondrick/vatic/) and/or the Open Source Computer Vision (http://opencv.org) 
+
+\subsection*{Task and Evaluation}
+for each threshold $\epsilon$,  we have a candidate lexical category $C(\epsilon)$. This category includes tokens whose acoustic similarity with the target template is lower than $\epsilon$.
+We compute a measure of Semantic Coherence as follows:
+$$
+SC=\frac{1}{N} \sum_{t,t' \in C(\epsilon)}\vec{S}(t). \vec{S}(t')
+$$
+Where $t$ and $t’$ are tokens of the category.  $\vec{S}(t)$ is the vector of semantic features associated with the word token $t$. $N$ is the total number of possible pairs in the category.
+
+A good category contains word tokens with shared semantic features (linked to the referent of this word). This will result in a high SC score.   A bad category will contain word tokens with different semantic features (mainly because of the presence of tokens from different lexical categories or because the baby did not look at the relevant features), leading to a low SC score. Similar measures have been successfully applied in previous studies on phonological learning (Fourtassi \& Dupoux 2014, Fourtassi, Dunbar \& Dupoux 2014). 
+
+The optimal category  is the one with:
+ 1) the highest semantic coherence score and 2) the highest acoustic threshold. 
+The second criterion is required to eliminate underspecification. It corresponds to a simplicity criterion: from all thresholds that give rise to equally coherent categories, pick the one with the least number of categories.
+
+\subsection*{Anticipated outcome}
+it is likely that relatively younger infants have noisy and crude  semantic data available to them, partly because of their developing motor and social skills (Frank et al. 2013).  Older infants are likely to be in possession of more robust and informative semantic representation. 
+Consequently we predict that the quality of the obtained lexical categories will increase as a function of age (probably in a non-linear fashion around one year and a half?). 
+
+\section*{Part II : How does Semantics help?}
+The previous part studied the role of semantics as a function of age. Crucially, all infants were put in similar conditions and were presented with the same words and objects. In this part instead, we study the qualitative aspects of semantics that affect the way infants zero in the phonetic details of the word form.
+
+\subsection*{Theoretical background}
+In order to study the interface between phonological processing and semantic learning, Werker et al (2008) introduced an interesting paradigm where Infants are tested on their ability to map a minimal pair (bin/din) to two different objects. This learning situation proved to be very interesting because patterns of failure and success under different conditions were observed.  A diversity of factors have been identified, most of which are linked either to the form or the cognitive abilities required for the word-learning task. At the level of the form, infants have been shown to succeed more in the task when the form contrast was replaced with a more salient one (Curtin et al. 2009), or when it was emphasized during the habituation phase, using distributional cues (Thiessen 2007) or by incorporating acoustic variability to help infants identify the relevant contrastive dimension (Rost \& McMurray 2009).  At the mapping level, infants succeeded more when the cognitive demands of the word-learning task have been made simpler. For instance, by making the referential context more explicit (Fennell \& Waxman 2010) or by testing infants with a paradigm that offers infants a visual choice, hence reducing demands on memory (Yoshida et al 2009). 
+
+All these studies have been crucial in advancing our understanding of the phenomenon, but they remain incomplete. Word learning is a mapping between form and meaning. So far, the literature has dealt with the form contrast properties and the mapping abilities. To our knowledge, no significant work has been performed to study systematically how properties of the meaning modulate success in the task. 
+
+We know now that babies do not learn word meaning in a vacuum. They organize their knowledge in a network where words are judged as more or less similar, according to different dimensions, such as perceptual features (Wojcik \& Saffran 2013) and taxonomic/thematic properties (Arias-Trejo \& Plunkett 2013). Using event related brain potential, Friedrich \& Friederici (2005) found an effect of semantic priming by as early as 14 mo.
+
+\subsection*{Objective}
+Previous experiments have shown that salience in word contrast conditioned success in similar word learning.  Here we propose to investigate whether semantic “salience” of the referents modulates how infants home in the phonetic contrast in the minimal pair word learning. 
+
+\subsection*{Population}
+we will test 40 infants at around 16 month-old. This age is expected to correspond to intermediate performance in the task: a higher success rate than 14 mo, without risking a ceiling effect with the 18 mo. Infants will be recruited (in some maternity? in collaboration with Anne’s lab?....) according to the ethics committee protocol(XXX). 
+
+\subsection*{Method and procedure}
+We will use the looking-while-listening paradigm (sometime called “preferential looking) (Fernald et al. 2008) since it was shown to provide a more precise and fine-grained measure of learning than the “Switch” paradigm originally introduced by Stager and Werker (Yoshida et al. 2009). In the habituation phase: infants will be taught the pairing between two words that differ minimally (bin/din) and two objects whose semantic similarity is a parameter that we vary from, “similar”, to “different” to “very different” (see pilot experiment below, for how to measure the subjective similarity). In the test phase, infants will hear one label (bin or din) and the two objects simultaneously. If the looking time at the correct referent is significantly above chance (after controlling for object preference), then learning has been successful. 
+
+\subsection*{Anticipated outcome}
+Our prediction is that success in the task will correlate with the semantic similarity of the referents. A bigger effect size is expected in the “very different” condition than the “different” condition. We also predict that learning will fail in the “similar” condition.
+
+\subsection*{Pilot experiment (Not sure if we need to include this in the project description)}
+Before performing the experiment described above, we will run a series of pilots to determine the semantic features that fit appropriately the conceptual organization of 16 mo old infants.  We will test different features proposed in the literature (form, function, taxonomy, animacity,...).
+
+To measure the “perceived” object similarity in infants, we will use an adapted version of the switch paradigm (Werker et al. 1998), the idea being to correlate the perceived similarity with the looking time. The latter has been successfully used before as a fine-grained behavioral tool to investigated different degrees of mismatch ( such as phonological mismatch  in White \& Morgan 2008).
+
+During the habituation phase, infants see an object1 and hear a label. In the test phase, infant are shown an other object2 with, crucially, the same label as in the habituation. The looking time at the wrong pairing (or the “switch”) is indicative of the amount of surprisal. 
+This surprisal will be taken as a measure of how dissimilar object2 is from object1. Pilot experiments will allow us to select the semantic feature that optimizes the perceived semantic similarity of the referents that will be used in the main experiment.
+
+\subsection*{Preliminary results}
+In preparation for this experiment, we ran a web-based experiment with adults using a simpler paradigm (based on verbal report).  Participants were trained to learn the pairing between a minimal pair in an artificial language and two objects. The objects' semantic similarity was varied at the taxomonic level. The results confirmed the predictions: participants in the semantically distant categories were more likely to choose a phonemic interpretation of the contrast, whereas participants in similar categories were more likely to choose an allophonic interpretation. Participants were even able to generalize to a new minimal pair that varied along the same phonetic contrast as the minimal pair used in the training. (Fourtassi \& Dupoux, \textit{submitted})
+
+\section*{Summary of the project}
+(Soon) 
+\section*{Relevance for collaboration}
+(This is just a suggestion, I am not sure if this is the right way to pitch it)
+This project will foster interesting collaborations between Dupoux Lab and Frank Lab at many levels.
+Dupoux Lab has been investigating the low level aspects of language acquisition (early perceptual attunement, phoneme learning and processing,..), it has developpend solid collaboration with researchers in speech technology and applied cutting-edge technique to model learning from the raw signal. Frank lab has, instead, focused on high level aspect of language acquisition, such as the mechanisms of semantic learning and the psychological and social biases involved. Researchers in the lab are familiar with high level coding of corpora and with using visual detetection algorithms. 
+
+The present project is at the interface of phonological development and semantic learning. It will tackle the problem from both an experimental and modeling perspective. This will bring together the expertise of both labs at the theoretical and technical levels. 
+
+\end{document}
